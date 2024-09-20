@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "975595926123",
+    "project_id": "calm-44eae",
+    "storage_bucket": "calm-44eae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975595926123:android:160951104edeeef10b372e",
+        "android_client_info": {
+          "package_name": "sssssimple.net"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArKe2Pk0axGeWMchwERQlV8u1fJXwZGis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
