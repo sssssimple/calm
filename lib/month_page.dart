@@ -1,7 +1,9 @@
 import 'dart:collection';
 
 import 'package:calm/event.dart';
+import 'package:calm/timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -28,7 +30,64 @@ Future<LinkedHashMap<DateTime, List<Event>>> events(EventsRef ref) async {
     hashCode: getHashCode,
   )..addAll(
       {
-        DateTime.now(): [const Event('Today\'s event 1')]
+        DateTime.now().copyWith(hour: 8): [
+          Event(
+            id: '1',
+            title: 'Today\'s event 1',
+            day: DateTime.now().copyWith(hour: 8).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '2',
+            title: 'Today\'s event 2',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '3',
+            title: 'Today\'s event 3',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '4',
+            title: 'Today\'s event 4',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '5',
+            title: 'Today\'s event 5',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '6',
+            title: 'Today\'s event 6',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '7',
+            title: 'Today\'s event 7',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+          Event(
+            id: '8',
+            title: 'Today\'s event 8',
+            day: DateTime.now().copyWith(hour: 18).toIso8601String(),
+            expenses: 10000,
+            incomes: 30000,
+          ),
+        ]
       },
     );
 }
@@ -66,35 +125,34 @@ class _MonthPageState extends ConsumerState<MonthPage> {
 
   @override
   Widget build(BuildContext context) {
-    final selectedEvents = ref.watch(eventsForDayProvider(_focusedDay));
-
-    return Column(
-      children: [
-        TableCalendar(
-          focusedDay: _focusedDay,
-          firstDay: _firstDay,
-          lastDay: _lastDay,
-          calendarFormat: _calendarFormat,
-          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-          availableCalendarFormats: const {CalendarFormat.month: 'Month'},
-          onDaySelected: _ondaySelected,
-          onPageChanged: (forcusedDay) {
-            _focusedDay = forcusedDay;
-          },
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: selectedEvents.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  selectedEvents[index].toString(),
-                ),
-              );
+    return Scaffold(
+      body: Column(
+        children: [
+          TableCalendar(
+            focusedDay: _focusedDay,
+            firstDay: _firstDay,
+            lastDay: _lastDay,
+            calendarFormat: _calendarFormat,
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+            availableCalendarFormats: const {CalendarFormat.month: 'Month'},
+            onDaySelected: _ondaySelected,
+            onPageChanged: (forcusedDay) {
+              _focusedDay = forcusedDay;
             },
           ),
+          Expanded(
+            child: Timeline(day: _focusedDay),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.go('/edit');
+        },
+        child: const Icon(
+          Icons.add,
         ),
-      ],
+      ),
     );
   }
 }

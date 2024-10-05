@@ -155,7 +155,7 @@ class _EventsForDayProviderElement
   DateTime get day => (origin as EventsForDayProvider).day;
 }
 
-String _$eventsHash() => r'68f0bcbe0b647ba71789e8d1bf0d73a2d3286290';
+String _$eventsHash() => r'165faf2ffafd40f041e91bca69611cbe23d911f7';
 
 /// See also [events].
 @ProviderFor(events)
