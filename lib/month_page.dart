@@ -101,8 +101,8 @@ class MonthPage extends ConsumerStatefulWidget {
 
 class _MonthPageState extends ConsumerState<MonthPage> {
   final CalendarFormat _calendarFormat = CalendarFormat.month;
-  final _firstDay = DateTime(_today.year, _today.month - 3, _today.day);
-  final _lastDay = DateTime(_today.year, _today.month + 3, _today.day);
+  final _firstDay = DateTime(_today.year - 5, _today.month, _today.day);
+  final _lastDay = DateTime(_today.year + 5, _today.month, _today.day);
 
   DateTime _focusedDay = _today;
   DateTime? _selectedDay;
@@ -126,29 +126,29 @@ class _MonthPageState extends ConsumerState<MonthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          TableCalendar(
-            focusedDay: _focusedDay,
-            firstDay: _firstDay,
-            lastDay: _lastDay,
-            calendarFormat: _calendarFormat,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            availableCalendarFormats: const {CalendarFormat.month: 'Month'},
-            onDaySelected: _ondaySelected,
-            onPageChanged: (forcusedDay) {
-              _focusedDay = forcusedDay;
-            },
-          ),
-          Expanded(
-            child: Timeline(day: _focusedDay),
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            TableCalendar(
+              focusedDay: _focusedDay,
+              firstDay: _firstDay,
+              lastDay: _lastDay,
+              calendarFormat: _calendarFormat,
+              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+              availableCalendarFormats: const {CalendarFormat.month: 'Month'},
+              onDaySelected: _ondaySelected,
+              onPageChanged: (forcusedDay) {
+                _focusedDay = forcusedDay;
+              },
+            ),
+            Expanded(
+              child: Timeline(day: _focusedDay),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.go('/edit');
-        },
+        onPressed: () => GoRouter.of(context).go('/edit'),
         child: const Icon(
           Icons.add,
         ),

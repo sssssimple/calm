@@ -13,12 +13,14 @@ GoRouter appRouter(AppRouterRef ref) {
       GoRoute(
         path: '/',
         builder: (context, state) => const MonthPage(),
-      ),
-      GoRoute(
-        path: '/edit',
-        builder: (context, state) => EditPage(
-          event: state.extra == null ? null : state.extra as Event,
-        ),
+        routes: [
+          GoRoute(
+            path: '/edit',
+            builder: (context, state) => EditPage(
+              event: state.extra == null ? null : state.extra as Event,
+            ),
+          ),
+        ],
       ),
     ],
   );
