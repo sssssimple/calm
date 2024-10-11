@@ -6,7 +6,7 @@ part of 'month_page.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$eventsForDayHash() => r'355e7f094724bab73377294afa63e4ca2b3df2da';
+String _$eventsForDayHash() => r'821f918dd7dfed22c5553ece692ed16567ba5947';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const eventsForDayProvider = EventsForDayFamily();
 
 /// See also [eventsForDay].
-class EventsForDayFamily extends Family<List<Event>> {
+class EventsForDayFamily extends Family<AsyncValue<List<Event>>> {
   /// See also [eventsForDay].
   const EventsForDayFamily();
 
@@ -72,7 +72,7 @@ class EventsForDayFamily extends Family<List<Event>> {
 }
 
 /// See also [eventsForDay].
-class EventsForDayProvider extends AutoDisposeProvider<List<Event>> {
+class EventsForDayProvider extends AutoDisposeFutureProvider<List<Event>> {
   /// See also [eventsForDay].
   EventsForDayProvider(
     DateTime day,
@@ -107,7 +107,7 @@ class EventsForDayProvider extends AutoDisposeProvider<List<Event>> {
 
   @override
   Override overrideWith(
-    List<Event> Function(EventsForDayRef provider) create,
+    FutureOr<List<Event>> Function(EventsForDayRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -124,7 +124,7 @@ class EventsForDayProvider extends AutoDisposeProvider<List<Event>> {
   }
 
   @override
-  AutoDisposeProviderElement<List<Event>> createElement() {
+  AutoDisposeFutureProviderElement<List<Event>> createElement() {
     return _EventsForDayProviderElement(this);
   }
 
@@ -142,34 +142,17 @@ class EventsForDayProvider extends AutoDisposeProvider<List<Event>> {
   }
 }
 
-mixin EventsForDayRef on AutoDisposeProviderRef<List<Event>> {
+mixin EventsForDayRef on AutoDisposeFutureProviderRef<List<Event>> {
   /// The parameter `day` of this provider.
   DateTime get day;
 }
 
 class _EventsForDayProviderElement
-    extends AutoDisposeProviderElement<List<Event>> with EventsForDayRef {
+    extends AutoDisposeFutureProviderElement<List<Event>> with EventsForDayRef {
   _EventsForDayProviderElement(super.provider);
 
   @override
   DateTime get day => (origin as EventsForDayProvider).day;
 }
-
-String _$eventsHash() => r'165faf2ffafd40f041e91bca69611cbe23d911f7';
-
-/// See also [events].
-@ProviderFor(events)
-final eventsProvider =
-    AutoDisposeFutureProvider<LinkedHashMap<DateTime, List<Event>>>.internal(
-  events,
-  name: r'eventsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$eventsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef EventsRef
-    = AutoDisposeFutureProviderRef<LinkedHashMap<DateTime, List<Event>>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

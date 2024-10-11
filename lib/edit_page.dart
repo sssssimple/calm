@@ -1,4 +1,5 @@
 import 'package:calm/event.dart';
+import 'package:calm/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -32,12 +33,6 @@ Future<List<String>> inputTags(InputTagsRef ref) async {
     'chameleon',
     'カメレオン',
   ];
-}
-
-@riverpod
-Future<void> saveEvent(SaveEventRef ref, Event event) async {
-  //TODO: db operation
-  return;
 }
 
 class EditPage extends ConsumerWidget {
@@ -158,16 +153,16 @@ class EditPage extends ConsumerWidget {
                     date.day,
                     time.hour,
                     time.minute,
-                  ).toIso8601String();
-                  final newEvent = Event(
-                    id: id,
-                    title: title,
-                    day: day,
-                    expenses: expenses,
-                    incomes: incomes,
-                    tags: tags ?? [],
                   );
-                  ref.read(saveEventProvider(newEvent));
+                  final newEvent = Event()
+                    ..title = title
+                    ..day = day
+                    ..expenses = expenses
+                    ..incomes = incomes
+                    ..tags = tags ?? [];
+                  final isar = ref.watch(isarProvider);
+                  await isar
+                      .writeTxn(() async => await isar.events.put(newEvent));
                   GoRouter.of(context).pop();
                 },
                 child: const Text('submit'),

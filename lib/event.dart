@@ -1,18 +1,15 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
 
-part 'event.freezed.dart';
+part 'event.g.dart';
 
-@freezed
-class Event with _$Event {
-  const Event._();
-  const factory Event({
-    required String id,
-    required String title,
-    required String day,
-    @Default([]) List<String> tags,
-    required int expenses,
-    required int incomes,
-  }) = _Event;
+@collection
+class Event {
+  Id id = Isar.autoIncrement;
+  late DateTime day;
+  late String title;
+  late List<String> tags;
+  late int expenses;
+  late int incomes;
 
   @override
   String toString() => title;
