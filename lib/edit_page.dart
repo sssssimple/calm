@@ -5,34 +5,24 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-import 'package:uuid/uuid.dart';
 
 part 'edit_page.g.dart';
 
 @riverpod
 Future<List<String>> inputTitles(InputTitlesRef ref) async {
-  //TODO: db operation
-
-  return [
-    'aardvark',
-    'bobcat',
-    'chameleon',
-    'カメレオン',
-  ];
+  final isar = ref.watch(isarProvider);
+  final events = await isar.events.where().findAll();
+  return events.map((event) => event.title).toSet().toList();
 }
 
 @riverpod
 Future<List<String>> inputTags(InputTagsRef ref) async {
-  //TODO: db operation
-
-  return [
-    'aardvark',
-    'bobcat',
-    'chameleon',
-    'カメレオン',
-  ];
+  final isar = ref.watch(isarProvider);
+  final events = await isar.events.where().findAll();
+  return events.map((event) => event.tags).expand((v) => v).toList();
 }
 
 class EditPage extends ConsumerWidget {
@@ -71,7 +61,7 @@ class EditPage extends ConsumerWidget {
               fieldViewBuilder: (context, textEditingController, focusNode,
                   onFieldSubmitted) {
                 return TextField(
-                  controller: titleController,
+                  controller: textEditingController,
                   focusNode: focusNode,
                   decoration: const InputDecoration(hintText: 'Enter Title'),
                 );
@@ -134,7 +124,6 @@ class EditPage extends ConsumerWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  final id = const Uuid().v4();
                   final title = titleController.text;
                   final expenses = int.parse(
                     expenesesController.text.isNotEmpty

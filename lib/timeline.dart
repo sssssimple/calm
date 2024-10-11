@@ -8,39 +8,46 @@ class Timeline extends ConsumerWidget {
   final DateTime day;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedEvents = ref.watch(eventsForDayProvider(day)).value!;
-
-    return ListView.builder(
-      itemCount: selectedEvents.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  DateFormat(('HH:mm')).format(
-                    selectedEvents[index].day,
+    final selectedEvents = ref.watch(eventsForDayProvider(day));
+    return selectedEvents.when(
+      data: (data) {
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      DateFormat(('HH:mm')).format(
+                        data[index].day,
+                      ),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      data[index].title,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      '${data[index].balance}',
+                      textAlign: TextAlign.end,
+                    ),
+                  )
+                ],
               ),
-              Expanded(
-                flex: 4,
-                child: Text(
-                  selectedEvents[index].title,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  '${selectedEvents[index].balance}',
-                  textAlign: TextAlign.end,
-                ),
-              )
-            ],
-          ),
+            );
+          },
         );
       },
+      error: (Object error, StackTrace stackTrace) {
+        return const SizedBox.shrink();
+      },
+      loading: CircularProgressIndicator.adaptive,
     );
   }
 }
