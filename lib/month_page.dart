@@ -15,26 +15,9 @@ final _today = DateTime.now();
 @riverpod
 Future<List<Event>> eventsForDay(EventsForDayRef ref, DateTime day) async {
   final isar = ref.watch(isarProvider);
-  final events = isar.events
-      .filter()
-      .dayBetween(
-          day.copyWith(
-            hour: 0,
-            minute: 0,
-            second: 0,
-            millisecond: 0,
-            microsecond: 0,
-          ),
-          day.copyWith(
-            hour: 23,
-            minute: 59,
-            second: 59,
-            millisecond: 999999,
-            microsecond: 999999,
-          ))
-      .findAll();
+  final events = await isar.events.where().findAll();
 
-  return events;
+  return events.where((event) => isSameDay(day, event.day)).toList();
 }
 
 class MonthPage extends ConsumerStatefulWidget {
