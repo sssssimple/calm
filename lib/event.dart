@@ -9,7 +9,7 @@ class Event with _$Event {
     required String id,
     required String title,
     required String day,
-    @Default([]) List<String> tag,
+    @Default([]) List<String> tags,
     required int expenses,
     required int incomes,
   }) = _Event;

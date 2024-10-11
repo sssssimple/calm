@@ -19,7 +19,7 @@ mixin _$Event {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get day => throw _privateConstructorUsedError;
-  List<String> get tag => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
   int get expenses => throw _privateConstructorUsedError;
   int get incomes => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $EventCopyWith<$Res> {
       {String id,
       String title,
       String day,
-      List<String> tag,
+      List<String> tags,
       int expenses,
       int incomes});
 }
@@ -57,7 +57,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? id = null,
     Object? title = null,
     Object? day = null,
-    Object? tag = null,
+    Object? tags = null,
     Object? expenses = null,
     Object? incomes = null,
   }) {
@@ -74,9 +74,9 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
               as String,
-      tag: null == tag
-          ? _value.tag
-          : tag // ignore: cast_nullable_to_non_nullable
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       expenses: null == expenses
           ? _value.expenses
@@ -101,7 +101,7 @@ abstract class _$$EventImplCopyWith<$Res> implements $EventCopyWith<$Res> {
       {String id,
       String title,
       String day,
-      List<String> tag,
+      List<String> tags,
       int expenses,
       int incomes});
 }
@@ -120,7 +120,7 @@ class __$$EventImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? day = null,
-    Object? tag = null,
+    Object? tags = null,
     Object? expenses = null,
     Object? incomes = null,
   }) {
@@ -137,9 +137,9 @@ class __$$EventImplCopyWithImpl<$Res>
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
               as String,
-      tag: null == tag
-          ? _value._tag
-          : tag // ignore: cast_nullable_to_non_nullable
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       expenses: null == expenses
           ? _value.expenses
@@ -160,10 +160,10 @@ class _$EventImpl extends _Event {
       {required this.id,
       required this.title,
       required this.day,
-      final List<String> tag = const [],
+      final List<String> tags = const [],
       required this.expenses,
       required this.incomes})
-      : _tag = tag,
+      : _tags = tags,
         super._();
 
   @override
@@ -172,13 +172,13 @@ class _$EventImpl extends _Event {
   final String title;
   @override
   final String day;
-  final List<String> _tag;
+  final List<String> _tags;
   @override
   @JsonKey()
-  List<String> get tag {
-    if (_tag is EqualUnmodifiableListView) return _tag;
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tag);
+    return EqualUnmodifiableListView(_tags);
   }
 
   @override
@@ -194,7 +194,7 @@ class _$EventImpl extends _Event {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.day, day) || other.day == day) &&
-            const DeepCollectionEquality().equals(other._tag, _tag) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.expenses, expenses) ||
                 other.expenses == expenses) &&
             (identical(other.incomes, incomes) || other.incomes == incomes));
@@ -202,7 +202,7 @@ class _$EventImpl extends _Event {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, title, day,
-      const DeepCollectionEquality().hash(_tag), expenses, incomes);
+      const DeepCollectionEquality().hash(_tags), expenses, incomes);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +216,7 @@ abstract class _Event extends Event {
       {required final String id,
       required final String title,
       required final String day,
-      final List<String> tag,
+      final List<String> tags,
       required final int expenses,
       required final int incomes}) = _$EventImpl;
   const _Event._() : super._();
@@ -228,7 +228,7 @@ abstract class _Event extends Event {
   @override
   String get day;
   @override
-  List<String> get tag;
+  List<String> get tags;
   @override
   int get expenses;
   @override
