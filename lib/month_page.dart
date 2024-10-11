@@ -93,7 +93,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => GoRouter.of(context).go('/edit'),
+        onPressed: () => GoRouter.of(context).push('/edit'),
         child: const Icon(
           Icons.add,
         ),

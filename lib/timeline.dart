@@ -32,6 +32,7 @@ class Timeline extends ConsumerWidget {
                           await isar.events.delete(data[index].id);
                         },
                       );
+                      // ignore: unused_result
                       ref.refresh(eventsForDayProvider(day).future);
                     },
                   )

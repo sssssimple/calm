@@ -26,12 +26,18 @@ Future<List<String>> inputTags(InputTagsRef ref) async {
   return events.map((event) => event.tags).expand((v) => v).toList();
 }
 
-class EditPage extends ConsumerWidget {
-  EditPage({
+class EditPage extends ConsumerStatefulWidget {
+  const EditPage({
     super.key,
     this.event,
   });
+
   final Event? event;
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditPageState();
+}
+
+class _EditPageState extends ConsumerState<EditPage> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final expenesesController = TextEditingController();
@@ -41,7 +47,7 @@ class EditPage extends ConsumerWidget {
   TimeOfDay time = TimeOfDay.now();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('edit'),
@@ -86,6 +92,7 @@ class EditPage extends ConsumerWidget {
                               lastDate: date.add(const Duration(days: 365)),
                             ) ??
                             DateTime.now();
+                        setState(() {});
                       },
                       child: Text(DateFormat('MMM d').format(date)),
                     ),
@@ -100,6 +107,7 @@ class EditPage extends ConsumerWidget {
                               initialEntryMode: TimePickerEntryMode.inputOnly,
                             ) ??
                             TimeOfDay.now();
+                        setState(() {});
                       },
                       child: Text('${time.hour}:${time.minute}'),
                     ),
