@@ -1,12 +1,9 @@
 import 'package:calm/event.dart';
-import 'package:calm/main.dart';
-import 'package:calm/month_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class Timeline extends ConsumerWidget {
   const Timeline(
