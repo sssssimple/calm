@@ -79,8 +79,10 @@ class _EditPageState extends ConsumerState<EditPage> {
         child: Column(
           children: [
             Autocomplete<String>(
+              initialValue: titleController.value,
               optionsBuilder: (TextEditingValue textEditingValue) async {
                 final titles = await ref.watch(inputTitlesProvider.future);
+                titles.remove('');
                 return titles.where(
                   (title) => title.contains(
                     textEditingValue.text.toLowerCase(),
@@ -90,7 +92,7 @@ class _EditPageState extends ConsumerState<EditPage> {
               fieldViewBuilder: (context, textEditingController, focusNode,
                   onFieldSubmitted) {
                 return TextField(
-                  controller: titleController,
+                  controller: textEditingController,
                   focusNode: focusNode,
                   decoration: const InputDecoration(hintText: 'Enter Title'),
                 );
