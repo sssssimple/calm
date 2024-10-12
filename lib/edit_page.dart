@@ -45,6 +45,28 @@ class _EditPageState extends ConsumerState<EditPage> {
   final tagController = StringTagController();
   DateTime date = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
+  late final bool isUpdate;
+  @override
+  void initState() {
+    super.initState();
+    final event = widget.event;
+    if (event == null) return;
+    titleController.text = event.title;
+    date = event.day;
+    time = TimeOfDay.fromDateTime(event.day);
+    expenesesController.text = event.expenses.toString();
+    incomesController.text = event.incomes.toString();
+    event.tags.map((tag) => tagController.addTag(tag));
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    expenesesController.dispose();
+    incomesController.dispose();
+    tagController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +90,12 @@ class _EditPageState extends ConsumerState<EditPage> {
               fieldViewBuilder: (context, textEditingController, focusNode,
                   onFieldSubmitted) {
                 return TextField(
-                  controller: textEditingController,
+                  controller: titleController,
                   focusNode: focusNode,
                   decoration: const InputDecoration(hintText: 'Enter Title'),
                 );
               },
+              onSelected: (option) => titleController.text = option,
             ),
             DecoratedBox(
               decoration: const BoxDecoration(
@@ -159,6 +182,10 @@ class _EditPageState extends ConsumerState<EditPage> {
                     ..incomes = incomes
                     ..tags = tags ?? [];
                   final isar = ref.watch(isarProvider);
+
+                  if (widget.event != null) {
+                    newEvent.id = widget.event!.id;
+                  }
                   await isar
                       .writeTxn(() async => await isar.events.put(newEvent));
                   GoRouter.of(context).pop();
