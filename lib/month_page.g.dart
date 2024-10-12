@@ -6,7 +6,21 @@ part of 'month_page.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$eventsForDayHash() => r'821f918dd7dfed22c5553ece692ed16567ba5947';
+String _$eventChangedHash() => r'c0ce53c3820f603efe38456cc6a352b051906198';
+
+/// See also [eventChanged].
+@ProviderFor(eventChanged)
+final eventChangedProvider = AutoDisposeStreamProvider<void>.internal(
+  eventChanged,
+  name: r'eventChangedProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$eventChangedHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef EventChangedRef = AutoDisposeStreamProviderRef<void>;
+String _$eventsForDayHash() => r'4fb495335ca87d1391c5b65793bdc2c6daefa137';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -154,5 +168,21 @@ class _EventsForDayProviderElement
   @override
   DateTime get day => (origin as EventsForDayProvider).day;
 }
+
+String _$eventsHash() => r'519625f377bac2395636657aa30a0ea043e60ec1';
+
+/// See also [Events].
+@ProviderFor(Events)
+final eventsProvider =
+    AutoDisposeAsyncNotifierProvider<Events, List<Event>>.internal(
+  Events.new,
+  name: r'eventsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$eventsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Events = AutoDisposeAsyncNotifier<List<Event>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -13,11 +13,44 @@ part 'month_page.g.dart';
 final _today = DateTime.now();
 
 @riverpod
-Future<List<Event>> eventsForDay(EventsForDayRef ref, DateTime day) async {
+Stream<void> eventChanged(EventChangedRef ref) {
   final isar = ref.watch(isarProvider);
-  final events = await isar.events.where().findAll();
+  return isar.events.watchLazy();
+}
 
+@riverpod
+FutureOr<List<Event>> eventsForDay(EventsForDayRef ref, DateTime day) async {
+  final events = await ref.watch(eventsProvider.future);
   return events.where((event) => isSameDay(day, event.day)).toList();
+}
+
+@riverpod
+class Events extends _$Events {
+  late final Isar isar;
+  @override
+  FutureOr<List<Event>> build() async {
+    isar = ref.watch(isarProvider);
+    List<Event> events = await isar.events.where().findAll();
+    return events;
+  }
+
+  Future<void> _loadData() async {
+    state = const AsyncValue.loading();
+    final events = await isar.events.where().findAll();
+    state = AsyncData(events);
+  }
+
+  void updateEvent(Event event) async {
+    await isar.writeTxn(() async => await isar.events.put(event));
+    _loadData();
+  }
+
+  Future<void> deleteEvent(Event event) async {
+    await isar.writeTxn(() async {
+      await isar.events.delete(event.id);
+    });
+    _loadData();
+  }
 }
 
 class MonthPage extends ConsumerStatefulWidget {
@@ -53,6 +86,8 @@ class _MonthPageState extends ConsumerState<MonthPage> {
 
   @override
   Widget build(BuildContext context) {
+    final focusedEvents = ref.watch(eventsForDayProvider(_focusedDay));
+    final deleteEvent = ref.watch(eventsProvider.notifier).deleteEvent;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -70,13 +105,18 @@ class _MonthPageState extends ConsumerState<MonthPage> {
               },
             ),
             Expanded(
-              child: Timeline(day: _focusedDay),
+              child: Timeline(
+                focusedEvents.value ?? [],
+                onPressedIcon: deleteEvent,
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => GoRouter.of(context).push('/edit'),
+        onPressed: () {
+          final result = GoRouter.of(context).push('/edit');
+        },
         child: const Icon(
           Icons.add,
         ),

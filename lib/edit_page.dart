@@ -181,13 +181,7 @@ class _EditPageState extends ConsumerState<EditPage> {
                     ..expenses = expenses
                     ..incomes = incomes
                     ..tags = tags ?? [];
-                  final isar = ref.watch(isarProvider);
-
-                  if (widget.event != null) {
-                    newEvent.id = widget.event!.id;
-                  }
-                  await isar
-                      .writeTxn(() async => await isar.events.put(newEvent));
+                  ref.read(eventsProvider.notifier).updateEvent(newEvent);
                   GoRouter.of(context).pop();
                 },
                 child: const Text('submit'),
