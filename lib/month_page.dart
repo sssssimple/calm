@@ -62,8 +62,8 @@ class MonthPage extends ConsumerStatefulWidget {
 
 class _MonthPageState extends ConsumerState<MonthPage> {
   final CalendarFormat _calendarFormat = CalendarFormat.month;
-  final _firstDay = DateTime(_today.year - 5, _today.month, _today.day);
-  final _lastDay = DateTime(_today.year + 5, _today.month, _today.day);
+  final _firstDay = DateTime(_today.year - 20, _today.month, _today.day);
+  final _lastDay = _today;
 
   DateTime _focusedDay = _today;
   DateTime? _selectedDay;
