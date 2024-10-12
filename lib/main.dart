@@ -2,6 +2,7 @@ import 'package:calm/event.dart';
 import 'package:calm/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -23,9 +24,14 @@ void main() async {
     [EventSchema],
     directory: dir.path,
   );
-  runApp(ProviderScope(overrides: [
-    isarProvider.overrideWithValue(isar),
-  ], child: const MainApp()));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then(
+    (_) => runApp(ProviderScope(overrides: [
+      isarProvider.overrideWithValue(isar),
+    ], child: const MainApp())),
+  );
 }
 
 class MainApp extends ConsumerWidget {
