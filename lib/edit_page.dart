@@ -50,8 +50,9 @@ class _EditPageState extends ConsumerState<EditPage> {
   void initState() {
     super.initState();
     final event = widget.event;
-    if (event == null) return;
-    titleController.text = event.title;
+    isUpdate = event != null;
+    if (!isUpdate) return;
+    titleController.text = event!.title;
     date = event.day;
     time = TimeOfDay.fromDateTime(event.day);
     expenesesController.text = event.expenses.toString();
@@ -134,7 +135,7 @@ class _EditPageState extends ConsumerState<EditPage> {
                             TimeOfDay.now();
                         setState(() {});
                       },
-                      child: Text('${time.hour}:${time.minute}'),
+                      child: Text(time.format(context)),
                     ),
                   ],
                 ),
@@ -183,6 +184,9 @@ class _EditPageState extends ConsumerState<EditPage> {
                     ..expenses = expenses
                     ..incomes = incomes
                     ..tags = tags ?? [];
+                  if (isUpdate) {
+                    newEvent.id = widget.event!.id;
+                  }
                   ref.read(eventsProvider.notifier).updateEvent(newEvent);
                   GoRouter.of(context).pop();
                 },
