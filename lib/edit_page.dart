@@ -216,11 +216,14 @@ class TagsField extends ConsumerWidget {
       onSelected: tagController.onTagSubmitted,
       optionsBuilder: (TextEditingValue textEditingValue) async {
         final tags = await ref.watch(inputTagsProvider.future);
-        return tags.where(
-          (tag) =>
-              tag.contains(textEditingValue.text.toLowerCase()) &&
-              !tagController.getTags!.contains(tag),
-        );
+        return tags
+            .where(
+              (tag) =>
+                  tag.contains(textEditingValue.text.toLowerCase()) &&
+                  !tagController.getTags!.contains(tag),
+            )
+            .toSet()
+            .toList();
       },
       optionsViewBuilder: (context, onSelected, options) {
         return Container(
