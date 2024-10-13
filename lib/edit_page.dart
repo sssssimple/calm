@@ -95,6 +95,7 @@ class _EditPageState extends ConsumerState<EditPage> {
                   controller: textEditingController,
                   focusNode: focusNode,
                   decoration: const InputDecoration(hintText: 'Enter Title'),
+                  onChanged: (value) => titleController.text = value,
                 );
               },
               onSelected: (option) => titleController.text = option,
