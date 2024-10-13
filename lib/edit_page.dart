@@ -57,7 +57,6 @@ class _EditPageState extends ConsumerState<EditPage> {
     time = TimeOfDay.fromDateTime(event.day);
     expenesesController.text = event.expenses.toString();
     incomesController.text = event.incomes.toString();
-    event.tags.map((tag) => tagController.addTag(tag));
   }
 
   @override
@@ -155,6 +154,7 @@ class _EditPageState extends ConsumerState<EditPage> {
             ),
             TagsField(
               tagController: tagController,
+              initialTags: widget.event?.tags,
             ),
             Center(
               child: ElevatedButton(
@@ -203,10 +203,11 @@ class _EditPageState extends ConsumerState<EditPage> {
 class TagsField extends ConsumerWidget {
   const TagsField({
     required this.tagController,
+    this.initialTags,
     super.key,
   });
-
   final StringTagController tagController;
+  final List<String>? initialTags;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -246,6 +247,7 @@ class TagsField extends ConsumerWidget {
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
         return TextFieldTags<String>(
+          initialTags: initialTags,
           textEditingController: textEditingController,
           textfieldTagsController: tagController,
           focusNode: focusNode,
