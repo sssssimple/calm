@@ -1,30 +1,13 @@
-import 'package:calm/event.dart';
-import 'package:calm/main.dart';
-import 'package:calm/month_page.dart';
+import 'package:calm/entity/event.dart';
+import 'package:calm/data/event_presenter.dart';
+import 'package:calm/data/input_presenter.dart';
+import 'package:calm/component/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:isar/isar.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-
-part 'edit_page.g.dart';
-
-@riverpod
-Future<List<String>> inputTitles(InputTitlesRef ref) async {
-  final isar = ref.watch(isarProvider);
-  final events = await isar.events.where().findAll();
-  return events.map((event) => event.title).toSet().toList();
-}
-
-@riverpod
-Future<List<String>> inputTags(InputTagsRef ref) async {
-  final isar = ref.watch(isarProvider);
-  final events = await isar.events.where().findAll();
-  return events.map((event) => event.tags).expand((v) => v).toList();
-}
 
 class EditPage extends ConsumerStatefulWidget {
   const EditPage({
@@ -301,51 +284,6 @@ class TagsField extends ConsumerWidget {
           },
         );
       },
-    );
-  }
-}
-
-class Tag extends StatelessWidget {
-  const Tag({
-    super.key,
-    required this.text,
-    required this.onTap,
-    this.isCancel = false,
-  });
-  final String text;
-  final Function()? onTap;
-  final bool isCancel;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              '#$text',
-              style: const TextStyle(color: Colors.white),
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            Icon(
-              !isCancel ? Icons.add_circle : Icons.cancel,
-              size: 14.0,
-              color: Colors.white,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

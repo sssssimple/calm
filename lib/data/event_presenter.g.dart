@@ -1,25 +1,11 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'month_page.dart';
+part of 'event_presenter.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$eventChangedHash() => r'c0ce53c3820f603efe38456cc6a352b051906198';
-
-/// See also [eventChanged].
-@ProviderFor(eventChanged)
-final eventChangedProvider = AutoDisposeStreamProvider<void>.internal(
-  eventChanged,
-  name: r'eventChangedProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$eventChangedHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef EventChangedRef = AutoDisposeStreamProviderRef<void>;
 String _$eventsForDayHash() => r'4fb495335ca87d1391c5b65793bdc2c6daefa137';
 
 /// Copied from Dart SDK
