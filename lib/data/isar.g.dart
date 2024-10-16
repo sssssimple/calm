@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'isar.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isarHash() => r'278c1ad481c70fe4dd72d393e831cf4b2913c0fc';
+String _$isarHash() => r'ea010a03ca2728fbc45010141942e4471235ea7c';
 
 /// See also [isar].
 @ProviderFor(isar)

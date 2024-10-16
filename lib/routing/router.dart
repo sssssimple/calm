@@ -1,6 +1,6 @@
-import 'package:calm/edit_page.dart';
-import 'package:calm/event.dart';
-import 'package:calm/month_page.dart';
+import 'package:calm/pages/edit_page.dart';
+import 'package:calm/entity/event.dart';
+import 'package:calm/pages/month_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -1,4 +1,4 @@
-import 'package:calm/event.dart';
+import 'package:calm/entity/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
