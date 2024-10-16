@@ -5,8 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-final _today = DateTime.now();
-
 class MonthPage extends ConsumerStatefulWidget {
   const MonthPage({super.key});
 
@@ -16,16 +14,19 @@ class MonthPage extends ConsumerStatefulWidget {
 
 class _MonthPageState extends ConsumerState<MonthPage> {
   final CalendarFormat _calendarFormat = CalendarFormat.month;
-  final _firstDay = DateTime(_today.year - 20, _today.month, _today.day);
-  final _lastDay = _today;
+  final _today = DateTime.now();
+  late final DateTime _firstDay;
+  late final DateTime _lastDay;
 
-  DateTime _focusedDay = _today;
+  late DateTime _focusedDay;
   DateTime? _selectedDay;
 
   @override
   void initState() {
     super.initState();
-
+    _firstDay = DateTime(_today.year - 20, _today.month, _today.day);
+    _lastDay = _today;
+    _focusedDay = _today;
     _selectedDay = _focusedDay;
   }
 
