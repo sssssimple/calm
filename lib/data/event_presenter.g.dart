@@ -155,6 +155,134 @@ class _EventsForDayProviderElement
   DateTime get day => (origin as EventsForDayProvider).day;
 }
 
+String _$totalForDayHash() => r'1e713daa6b180004879004193ae8cd3f88a153b5';
+
+/// See also [totalForDay].
+@ProviderFor(totalForDay)
+const totalForDayProvider = TotalForDayFamily();
+
+/// See also [totalForDay].
+class TotalForDayFamily extends Family<int> {
+  /// See also [totalForDay].
+  const TotalForDayFamily();
+
+  /// See also [totalForDay].
+  TotalForDayProvider call(
+    DateTime day,
+  ) {
+    return TotalForDayProvider(
+      day,
+    );
+  }
+
+  @override
+  TotalForDayProvider getProviderOverride(
+    covariant TotalForDayProvider provider,
+  ) {
+    return call(
+      provider.day,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'totalForDayProvider';
+}
+
+/// See also [totalForDay].
+class TotalForDayProvider extends AutoDisposeProvider<int> {
+  /// See also [totalForDay].
+  TotalForDayProvider(
+    DateTime day,
+  ) : this._internal(
+          (ref) => totalForDay(
+            ref as TotalForDayRef,
+            day,
+          ),
+          from: totalForDayProvider,
+          name: r'totalForDayProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$totalForDayHash,
+          dependencies: TotalForDayFamily._dependencies,
+          allTransitiveDependencies:
+              TotalForDayFamily._allTransitiveDependencies,
+          day: day,
+        );
+
+  TotalForDayProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.day,
+  }) : super.internal();
+
+  final DateTime day;
+
+  @override
+  Override overrideWith(
+    int Function(TotalForDayRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TotalForDayProvider._internal(
+        (ref) => create(ref as TotalForDayRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        day: day,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<int> createElement() {
+    return _TotalForDayProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is TotalForDayProvider && other.day == day;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, day.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin TotalForDayRef on AutoDisposeProviderRef<int> {
+  /// The parameter `day` of this provider.
+  DateTime get day;
+}
+
+class _TotalForDayProviderElement extends AutoDisposeProviderElement<int>
+    with TotalForDayRef {
+  _TotalForDayProviderElement(super.provider);
+
+  @override
+  DateTime get day => (origin as TotalForDayProvider).day;
+}
+
 String _$eventsHash() => r'519625f377bac2395636657aa30a0ea043e60ec1';
 
 /// See also [Events].

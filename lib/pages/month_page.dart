@@ -1,8 +1,10 @@
 import 'package:calm/data/event_presenter.dart';
 import 'package:calm/component/timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MonthPage extends ConsumerStatefulWidget {
@@ -43,6 +45,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
   Widget build(BuildContext context) {
     final focusedEvents = ref.watch(eventsForDayProvider(_focusedDay));
     final deleteEvent = ref.watch(eventsProvider.notifier).deleteEvent;
+    final totalForDay = ref.watch(totalForDayProvider(_focusedDay));
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -65,6 +68,27 @@ class _MonthPageState extends ConsumerState<MonthPage> {
                 onPressedIcon: deleteEvent,
               ),
             ),
+            Row(
+              children: [
+                const Gap(16),
+                Text(
+                  '${DateFormat('MM/dd').format(_focusedDay)}, total',
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                const Expanded(
+                  child: Gap(0),
+                ),
+                Text(
+                  NumberFormat('#,###').format(totalForDay),
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                const Gap(80),
+              ],
+            )
           ],
         ),
       ),

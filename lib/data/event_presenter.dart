@@ -40,3 +40,12 @@ FutureOr<List<Event>> eventsForDay(EventsForDayRef ref, DateTime day) async {
   final events = await ref.watch(eventsProvider.future);
   return events.where((event) => isSameDay(day, event.day)).toList();
 }
+
+@riverpod
+int totalForDay(TotalForDayRef ref, DateTime day) {
+  final focusedEvents = ref.watch(eventsForDayProvider(day));
+  return focusedEvents.value
+          ?.map((e) => e.balance)
+          .fold(0, (previous, current) => previous! + current) ??
+      0;
+}

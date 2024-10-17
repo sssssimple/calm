@@ -40,7 +40,6 @@ class Timeline extends ConsumerWidget {
             title: Row(
               children: [
                 Expanded(
-                  flex: 1,
                   child: Text(
                     DateFormat(('HH:mm')).format(
                       events[index].day,
@@ -48,7 +47,7 @@ class Timeline extends ConsumerWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 4,
+                  flex: 3,
                   child: Text(
                     events[index].title,
                     overflow: TextOverflow.ellipsis,
@@ -56,7 +55,7 @@ class Timeline extends ConsumerWidget {
                 ),
                 Expanded(
                   child: Text(
-                    '${events[index].balance}',
+                    NumberFormat('#,###').format(events[index].balance),
                     textAlign: TextAlign.end,
                   ),
                 )
