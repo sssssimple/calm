@@ -45,7 +45,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
   Widget build(BuildContext context) {
     final focusedEvents = ref.watch(eventsForDayProvider(_focusedDay));
     final deleteEvent = ref.watch(eventsProvider.notifier).deleteEvent;
-    final totalForDay = ref.watch(totalForDayProvider(_focusedDay));
+    final totalForMonth = ref.watch(totalForMonthProvider(_focusedDay));
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -61,6 +61,16 @@ class _MonthPageState extends ConsumerState<MonthPage> {
               onPageChanged: (forcusedDay) {
                 _focusedDay = forcusedDay;
               },
+              calendarBuilders: CalendarBuilders(
+                markerBuilder: (context, day, events) {
+                  final total = ref.watch(totalForDayProvider(day));
+                  return total != 0
+                      ? Text(
+                          '$total',
+                        )
+                      : null;
+                },
+              ),
             ),
             Expanded(
               child: Timeline(
@@ -72,7 +82,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
               children: [
                 const Gap(16),
                 Text(
-                  '${DateFormat('MM/dd').format(_focusedDay)}, total',
+                  '${DateFormat('MM/yyyy').format(_focusedDay)}, total',
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -81,7 +91,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
                   child: Gap(0),
                 ),
                 Text(
-                  NumberFormat('#,###').format(totalForDay),
+                  NumberFormat('#,###').format(totalForMonth),
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -94,7 +104,9 @@ class _MonthPageState extends ConsumerState<MonthPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GoRouter.of(context).push('/edit');
+          GoRouter.of(context).push(
+            '/edit',
+          );
         },
         child: const Icon(
           Icons.add,

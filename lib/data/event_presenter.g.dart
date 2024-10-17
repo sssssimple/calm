@@ -283,6 +283,134 @@ class _TotalForDayProviderElement extends AutoDisposeProviderElement<int>
   DateTime get day => (origin as TotalForDayProvider).day;
 }
 
+String _$totalForMonthHash() => r'184c9dd55d9de33aee9e37ee14fff8b968e36834';
+
+/// See also [totalForMonth].
+@ProviderFor(totalForMonth)
+const totalForMonthProvider = TotalForMonthFamily();
+
+/// See also [totalForMonth].
+class TotalForMonthFamily extends Family<int> {
+  /// See also [totalForMonth].
+  const TotalForMonthFamily();
+
+  /// See also [totalForMonth].
+  TotalForMonthProvider call(
+    DateTime day,
+  ) {
+    return TotalForMonthProvider(
+      day,
+    );
+  }
+
+  @override
+  TotalForMonthProvider getProviderOverride(
+    covariant TotalForMonthProvider provider,
+  ) {
+    return call(
+      provider.day,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'totalForMonthProvider';
+}
+
+/// See also [totalForMonth].
+class TotalForMonthProvider extends AutoDisposeProvider<int> {
+  /// See also [totalForMonth].
+  TotalForMonthProvider(
+    DateTime day,
+  ) : this._internal(
+          (ref) => totalForMonth(
+            ref as TotalForMonthRef,
+            day,
+          ),
+          from: totalForMonthProvider,
+          name: r'totalForMonthProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$totalForMonthHash,
+          dependencies: TotalForMonthFamily._dependencies,
+          allTransitiveDependencies:
+              TotalForMonthFamily._allTransitiveDependencies,
+          day: day,
+        );
+
+  TotalForMonthProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.day,
+  }) : super.internal();
+
+  final DateTime day;
+
+  @override
+  Override overrideWith(
+    int Function(TotalForMonthRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TotalForMonthProvider._internal(
+        (ref) => create(ref as TotalForMonthRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        day: day,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<int> createElement() {
+    return _TotalForMonthProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is TotalForMonthProvider && other.day == day;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, day.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin TotalForMonthRef on AutoDisposeProviderRef<int> {
+  /// The parameter `day` of this provider.
+  DateTime get day;
+}
+
+class _TotalForMonthProviderElement extends AutoDisposeProviderElement<int>
+    with TotalForMonthRef {
+  _TotalForMonthProviderElement(super.provider);
+
+  @override
+  DateTime get day => (origin as TotalForMonthProvider).day;
+}
+
 String _$eventsHash() => r'519625f377bac2395636657aa30a0ea043e60ec1';
 
 /// See also [Events].

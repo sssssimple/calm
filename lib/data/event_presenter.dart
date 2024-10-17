@@ -49,3 +49,22 @@ int totalForDay(TotalForDayRef ref, DateTime day) {
           .fold(0, (previous, current) => previous! + current) ??
       0;
 }
+
+@riverpod
+int totalForMonth(TotalForMonthRef ref, DateTime day) {
+  final events = ref.watch(eventsProvider);
+  final eventsForMonth =
+      events.value?.where((event) => isSameMonth(day, event.day));
+  return eventsForMonth
+          ?.map((event) => event.balance)
+          .fold(0, (previous, current) => previous! + current) ??
+      0;
+}
+
+bool isSameMonth(DateTime? a, DateTime? b) {
+  if (a == null || b == null) {
+    return false;
+  }
+
+  return a.year == b.year && a.month == b.month;
+}
