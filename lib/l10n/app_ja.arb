@@ -1,0 +1,11 @@
+{
+  "@@locale": "ja",
+  "delete": "削除",
+  "total": "合計",
+  "title": "タイトル",
+  "expenses": "支出",
+  "incomes": "収入",
+  "tags": "タグ",
+  "submit": "決定",
+  "edit": "編集"
+}

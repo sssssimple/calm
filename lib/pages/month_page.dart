@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MonthPage extends ConsumerStatefulWidget {
   const MonthPage({super.key});
@@ -46,6 +47,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
     final focusedEvents = ref.watch(eventsForDayProvider(_focusedDay));
     final deleteEvent = ref.watch(eventsProvider.notifier).deleteEvent;
     final totalForMonth = ref.watch(totalForMonthProvider(_focusedDay));
+    final l10n = L10n.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -82,7 +84,7 @@ class _MonthPageState extends ConsumerState<MonthPage> {
               children: [
                 const Gap(16),
                 Text(
-                  '${DateFormat('MM/yyyy').format(_focusedDay)}, total',
+                  '${DateFormat('MM/yyyy').format(_focusedDay)}, ${l10n.total}',
                   style: const TextStyle(
                     fontSize: 18,
                   ),

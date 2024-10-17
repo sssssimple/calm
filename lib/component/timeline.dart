@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Timeline extends ConsumerWidget {
   const Timeline(
@@ -15,6 +16,7 @@ class Timeline extends ConsumerWidget {
   final Function(Event)? onPressedIcon;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context)!;
     return ListView.builder(
       itemCount: events.length,
       itemBuilder: (context, index) {
@@ -25,7 +27,7 @@ class Timeline extends ConsumerWidget {
               SlidableAction(
                 icon: Icons.delete,
                 backgroundColor: Colors.red,
-                label: 'delete',
+                label: l10n.delete,
                 onPressed: (context) {
                   if (onPressedIcon == null) return;
                   onPressedIcon!(events[index]);

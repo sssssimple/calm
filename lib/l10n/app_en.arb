@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "delete": "delete",
+  "total": "total",
+  "title": "title",
+  "expenses": "expenses",
+  "incomes": "incomes",
+  "tags": "tags",
+  "submit": "submit",
+  "edit": "edit"
+}

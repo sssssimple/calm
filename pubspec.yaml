@@ -1,7 +1,7 @@
 name: calm
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.1.0
+version: 1.0.1
 
 environment:
   sdk: ">=3.4.3 <4.0.0"
@@ -24,6 +24,8 @@ dependencies:
   path_provider: ^2.1.4
   flutter_slidable: ^3.1.1
   gap: ^3.0.1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -39,3 +41,4 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true

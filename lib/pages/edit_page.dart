@@ -8,8 +8,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
-class EditPage extends ConsumerStatefulWidget {
+class EditPage extends StatefulHookConsumerWidget {
   const EditPage({
     super.key,
     this.event,
@@ -53,9 +54,10 @@ class _EditPageState extends ConsumerState<EditPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('edit'),
+        title: Text(l10n.edit),
       ),
       body: Form(
         key: _formKey,
@@ -77,7 +79,7 @@ class _EditPageState extends ConsumerState<EditPage> {
                 return TextField(
                   controller: textEditingController,
                   focusNode: focusNode,
-                  decoration: const InputDecoration(hintText: 'Enter Title'),
+                  decoration: InputDecoration(hintText: l10n.title),
                   onChanged: (value) => titleController.text = value,
                 );
               },
@@ -126,13 +128,13 @@ class _EditPageState extends ConsumerState<EditPage> {
             ),
             TextFormField(
               controller: expenesesController,
-              decoration: const InputDecoration(hintText: 'expenses'),
+              decoration: InputDecoration(hintText: l10n.expenses),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             TextFormField(
               controller: incomesController,
-              decoration: const InputDecoration(hintText: 'incomes'),
+              decoration: InputDecoration(hintText: l10n.incomes),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
@@ -174,7 +176,7 @@ class _EditPageState extends ConsumerState<EditPage> {
                   ref.read(eventsProvider.notifier).updateEvent(newEvent);
                   GoRouter.of(context).pop();
                 },
-                child: const Text('submit'),
+                child: Text(l10n.submit),
               ),
             ),
           ],
@@ -195,6 +197,7 @@ class TagsField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context)!;
     return Autocomplete<String>(
       onSelected: tagController.onTagSubmitted,
       optionsBuilder: (TextEditingValue textEditingValue) async {
@@ -256,8 +259,7 @@ class TagsField extends ConsumerWidget {
                     width: 3.0,
                   ),
                 ),
-                hintText:
-                    textFieldTagValues.tags.isNotEmpty ? '' : "Enter tag...",
+                hintText: textFieldTagValues.tags.isNotEmpty ? '' : l10n.tags,
                 errorText: textFieldTagValues.error,
                 prefixIcon: textFieldTagValues.tags.isNotEmpty
                     ? SingleChildScrollView(
